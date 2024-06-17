@@ -12,7 +12,6 @@ class MedicalCoverage(models.Model):
     _inherit = ["medical.abstract", "mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(
-        string="Name",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
@@ -51,17 +50,13 @@ class MedicalCoverage(models.Model):
         help="Current state of the coverage.",
     )  # FHIR Field: status
     subscriber_id = fields.Char(
-        string="Subscriber Id",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
 
     @api.model
     def _get_internal_identifier(self, vals):
-        return (
-            self.env["ir.sequence"].sudo().next_by_code("medical.coverage")
-            or "/"
-        )
+        return self.env["ir.sequence"].sudo().next_by_code("medical.coverage") or "/"
 
     @api.depends("name", "internal_identifier")
     def name_get(self):

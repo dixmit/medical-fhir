@@ -8,9 +8,7 @@ from odoo.tests.common import TransactionCase
 class TestMedicalCoverage(TransactionCase):
     def setUp(self):
         super(TestMedicalCoverage, self).setUp()
-        self.medical_user_group = self.env.ref(
-            "medical_base.group_medical_financial"
-        )
+        self.medical_user_group = self.env.ref("medical_base.group_medical_financial")
         self.medical_user = self._create_user(
             "medical_user", self.medical_user_group.id
         )
@@ -25,7 +23,7 @@ class TestMedicalCoverage(TransactionCase):
     def _create_user(self, name, group_ids):
         return (
             self.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(**{"no_reset_password": True})
             .create(
                 {
                     "name": name,
@@ -38,14 +36,10 @@ class TestMedicalCoverage(TransactionCase):
         )
 
     def _create_patient(self):
-        return self.patient_model.create(
-            {"name": "Test patient", "gender": "female"}
-        )
+        return self.patient_model.create({"name": "Test patient", "gender": "female"})
 
     def _create_payor(self):
-        return self.payor_model.create(
-            {"name": "Test payor", "is_payor": True}
-        )
+        return self.payor_model.create({"name": "Test payor", "is_payor": True})
 
     def _create_coverage_template(self, state=False):
         vals = {"name": "test coverage template", "payor_id": self.payor_1.id}

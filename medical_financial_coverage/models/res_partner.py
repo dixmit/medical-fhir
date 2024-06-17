@@ -52,14 +52,12 @@ class ResPartner(models.Model):
         return result
 
     def _check_medical(self, mode="write"):
-        super()._check_medical(mode=mode)
+        res = super()._check_medical(mode=mode)
 
         if (
             self.is_payor
             and mode != "read"
-            and not self.env.user.has_group(
-                "medical_base.group_medical_financial"
-            )
+            and not self.env.user.has_group("medical_base.group_medical_financial")
         ):
             _logger.info(
                 "Access Denied by ACLs for operation: %s, uid: %s, model: %s",
@@ -73,3 +71,4 @@ class ResPartner(models.Model):
                     mode=mode,
                 )
             )
+        return res
