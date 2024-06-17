@@ -6,7 +6,7 @@
     "name": "Medical Encounter careplan",
     "summary": "Joins careplans and encounters",
     "version": "14.0.1.0.0",
-    "author": "CreuBlanca, ForgeFlow, Odoo Community Association (OCA)",
+    "author": "CreuBlanca, Tegin, ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/tegin/medical-fhir",
     "category": "Medical",
     "license": "LGPL-3",
